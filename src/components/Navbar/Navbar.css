@@ -1,0 +1,11 @@
+.lightMode {
+    background-color: black!important
+}
+.darkMode {
+    background-color: blue!important;
+}
+.profileIcon {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
