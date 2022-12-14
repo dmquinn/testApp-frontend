@@ -13,7 +13,13 @@ const PostList = () => {
       setPosts(response.data);
     });
   };
+
   useEffect(() => {
+    const cart = localStorage.getItem("cartItem");
+    const x = JSON.stringify(cart);
+
+    console.log(x); //007
+
     getPosts();
   }, []);
 
@@ -21,10 +27,13 @@ const PostList = () => {
     <div>
       {posts &&
         posts.map((post) => (
-          <Link to={`/posts/${post._id}`} key={post._id}>
-            <div>{post.title}</div>
-          </Link>
+          <>
+            <Link to={`/posts/${post._id}`} key={post._id}>
+              <div>{post.title}</div>
+            </Link>
+          </>
         ))}
+
       <AddPostForm refresh={getPosts} />
     </div>
   );

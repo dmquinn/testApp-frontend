@@ -5,7 +5,6 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProviderWrapper } from "./context/theme.context";
 import { AuthProviderWrapper } from "./context/auth.context";
-
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

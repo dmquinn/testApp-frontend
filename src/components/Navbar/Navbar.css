@@ -9,3 +9,16 @@
     width: 50px;
     border-radius: 50%;
 }
+.navbar,
+.navbar-default, .py-4 .container, a, button, span {
+    background-image: linear-gradient(to bottom, #000000 0, #000000 100%) !important;
+    color: whitesmoke!important;
+    /* override background image gradient w/ flat color */
+}
+.button {
+    /* background-color: rgba(0, 0, 0, 0); */
+    padding: 20px;
+    margin: 20px;
+    /* color: whitesmoke; */
+    border: 0;
+}

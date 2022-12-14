@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context/auth.context";
 
-const Login = (props) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const fetched_userName = e.target[0].value;
-    props.submit(fetched_userName);
+const Login = ({ submit }) => {
+  const { user } = useContext(AuthContext);
+  user && console.log(user);
+
+  const handleClick = () => {
+    console.log("clicked");
+    const username = user.name;
+    submit(username);
   };
   return (
     <div className="login-container">
       <h1>Chat Prototype</h1>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <input placeholder="Enter username" className="login-form"></input>
-      </form>
+      <button onClick={handleClick}>Start Chatting</button>
     </div>
   );
 };

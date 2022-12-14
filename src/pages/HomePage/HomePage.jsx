@@ -1,12 +1,18 @@
+import { Table } from "antd";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Chat from "../../components/Chat/Chat";
-import FilterModal from "../../components/FilterModal";
+import Tab from "../../components/Table";
+import { AuthContext } from "../../context/auth.context";
 
 import "./HomePage.css";
 
 function HomePage() {
+  const { user } = useContext(AuthContext);
+
+  user && console.log(user._id);
+
   const [showChat, setShowChat] = useState(false);
   const [users, setUsers] = useState([]);
   const [chatPartner, setChatPartner] = useState("");
@@ -17,13 +23,13 @@ function HomePage() {
     axios.get(`${API_URL}/api/users/`).then((response) => {
       setUsers(response.data);
     });
-
   useEffect(() => {
     getUsers();
   }, []);
   return (
     <div className="homePage">
       <Link to="/posts">projects</Link>
+      {/* <Tab /> */}
       <button
         className={showChat ? "chatButtonHide" : "chatButton"}
         onClick={() => setShowChat(!showChat)}
@@ -31,7 +37,6 @@ function HomePage() {
         CHAT
       </button>
       <Chat showChat={showChat} chatPartner={chatPartner} />
-      {/* <FilterModal /> */}
     </div>
   );
 }

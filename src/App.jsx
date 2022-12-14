@@ -11,10 +11,16 @@ import IsAnon from "./components/IsAnon/IsAnon";
 import PostDetails from "./pages/PostDetails/PostDetails";
 
 function App() {
+  let currentUser;
+  localStorage.setItem("user", currentUser);
+
   return (
     <div className="App">
       <Navbar />
-
+      {/* <img
+        src="https://images.unsplash.com/photo-1621237023000-6a628c285938?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+        className="w-100 h-100 p-5"
+      /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/posts" element={<PostsList />} />

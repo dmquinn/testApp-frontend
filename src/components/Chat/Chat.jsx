@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
+import Chatwindow from "./components/Chatwindow";
 import Home from "./components/Home";
-import Login from "./components/Login";
+import "./Chat.css";
 
 import socket from "./socket";
 
 const Chat = () => {
-  const [username, setUserName] = useState("");
+  const [userName, setUserName] = useState("");
   const [usersList, addUsers] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  const { currentUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   socket.on("users", (users) => {
     users.forEach((user) => {
@@ -26,20 +27,21 @@ const Chat = () => {
   });
 
   socket.on("user connected", (user) => {
-    if (!usersList.includes(user)) {
-      addUsers([...usersList, user]);
-    } else console.log("HELLO, NO");
+    addUsers([...usersList, user]);
   });
+
   useEffect(() => {
-    if (currentUser) {
-      setUserName(currentUser.name);
-      socket.auth = { username };
+    console.log("usersList", usersList);
+    if (user) {
+      setUserName(user.name);
+      socket.auth = { userName };
       socket.connect();
     }
-  }, [currentUser, username]);
+  }, [user, userName]);
+
   return (
     <div className="App">
-      <Home user={username} connectedUsers={usersList} />
+      <Home selectedUser={user} connectedUsers={usersList} />
     </div>
   );
 };

@@ -14,24 +14,26 @@ const FilterModal = (props) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(filterData);
+
+    // console.log(filterData);
     setFilterData({});
     colorsArr = [];
   }
 
   const handleColors = (e) => {
-    !filterData.dataColors.includes(e.target.value) &&
-      e.target.checked &&
-      setFilterData({
-        ...filterData,
-        dataColors: [...filterData.dataColors, e.target.value],
-      });
-    const newArr = filterData.dataColors;
-
-    e.target.checked === false &&
-      filterData.dataColors &&
-      setFilterData(newArr.filter((item) => item !== e.target.value));
+    e.target.checked
+      ? setFilterData({
+          ...filterData,
+          dataColors: [...filterData.dataColors, e.target.value],
+        })
+      : setFilterData({
+          ...filterData,
+          dataColors: filterData.dataColors.filter(
+            (color) => color !== e.target.value
+          ),
+        });
   };
+
   useEffect(() => {
     console.log(filterData.dataColors);
   }, [filterData]);
@@ -41,7 +43,7 @@ const FilterModal = (props) => {
       <div>
         <p>Colors:</p>
         {colors.map((color) => (
-          <div className="form-check-inline">
+          <div className="form-check-inline" key={color}>
             <input
               style={
                 color === "white"
